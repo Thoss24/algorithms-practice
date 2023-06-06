@@ -1,11 +1,42 @@
+class Graph:
 
-class MainProject():
+    def cityReachable(self):
+        print("City reachable")
+
+    def minDistance(self):
+        print("Min distance")
+
+    def minSpanningTree(self):
+        print("Min spanning tree")
+
+class MainProject(Graph):
 
     def showFunctionality(self):
-        print('1. Searching a city from the current city')
-        print('2. The minimum distance between two cities')
-        print('3 FInding the minimum spanning tree')
+        print('London, Manchester, Liverpool, Bournemouth, Southampton, Exeter, Leeds, Cardiff')
+        print('1. Searching a city from the current city, from the above list of cities.')
+        print('2. The minimum distance between two cities, from the above list of cities.')
+        print('3 Finding the minimum spanning tree from, from the above list of cities.')
         userInput = input("Choose an option by inputting the corresponding number: ")
+        if userInput == "1":
+            self.option1()
+        elif userInput == "2":
+            self.option2()
+        else:
+            self.option3()
+
+    def option1(self):
+        print("You have chosen to check if one city is reachable to another.")
+        print("Input your chosen source city then your chosen destination city")
+        self.cityReachable()
+
+    def option2(self):
+        print("You have chosen to check the minimum distance from the source city to the destination city.")
+        print("Input your chosen source city then your chosen destination city")
+        self.minDistance()
+
+    def option3(self):
+        print("You have chosen to to check the minimum spanning tree and total cost of the spanning tree. See below.")
+        self.minSpanningTree()
 
 class Node:
     def __init__(self, data, next=None):
@@ -47,17 +78,8 @@ class LinkedList(MainProject):
         password = input('Enter Password: ')
         self.validate(username, password)
 
-# class Credentials(LinkedList):
-
-#     def login(self):
-#         username = input('Enter Username: ')
-#         password = input('Enter Password: ')
-#         self.validate(username, password)
-
-      
 
 linked_list = LinkedList()
-#credentials = Credentials()
 linked_list.insert({'Username': 'Username 1', "Password": 'Password 1'})
 linked_list.insert({'Username': 'Username 2', "Password": 'Password 2'})
 linked_list.insert({'Username': 'Username 3', "Password": 'Password 3'})
