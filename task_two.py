@@ -1,7 +1,10 @@
+
 class Graph:
 
     def cityReachable(self):
         print("City reachable")
+        input("Source city: ")
+        input("Destination city: ")
 
     def minDistance(self):
         print("Min distance")
@@ -79,16 +82,16 @@ class LinkedList(MainProject):
         self.validate(username, password)
 
 
-linked_list = LinkedList()
-linked_list.insert({'Username': 'Username 1', "Password": 'Password 1'})
-linked_list.insert({'Username': 'Username 2', "Password": 'Password 2'})
-linked_list.insert({'Username': 'Username 3', "Password": 'Password 3'})
-linked_list.insert({'Username': 'Username 4', "Password": 'Password 4'})
-linked_list.insert({'Username': 'Username 5', "Password": 'Password 5'})
-linked_list.insert({'Username': 'Username 6', "Password": 'Password 6'})
-linked_list.insert({'Username': 'Username 7', "Password": 'Password 7'})
-linked_list.insert({'Username': 'Username 8', "Password": 'Password 8'})
-linked_list.insert({'Username': 'Username 9', "Password": 'Password 9'})
-linked_list.insert({'Username': 'Username 10', "Password": 'Password 10'})
+# linked_list = LinkedList()
+# linked_list.insert({'Username': 'Username 1', "Password": 'Password 1'})
+# linked_list.insert({'Username': 'Username 2', "Password": 'Password 2'})
+# linked_list.insert({'Username': 'Username 3', "Password": 'Password 3'})
+# linked_list.insert({'Username': 'Username 4', "Password": 'Password 4'})
+# linked_list.insert({'Username': 'Username 5', "Password": 'Password 5'})
+# linked_list.insert({'Username': 'Username 6', "Password": 'Password 6'})
+# linked_list.insert({'Username': 'Username 7', "Password": 'Password 7'})
+# linked_list.insert({'Username': 'Username 8', "Password": 'Password 8'})
+# linked_list.insert({'Username': 'Username 9', "Password": 'Password 9'})
+# linked_list.insert({'Username': 'Username 10', "Password": 'Password 10'})
 
-linked_list.login()
+# linked_list.login()
