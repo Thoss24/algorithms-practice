@@ -1,10 +1,40 @@
 
+graph_items = {
+  '5' : {'3', '7'}, #assign each city a number value. i.e, ask user "To select London as source press 1, and to choose exeter as destination choose 2"
+  '3' : ['2', '4'],
+  '7' : ['8'],
+  '2' : [],
+  '4' : ['8'],
+  '8' : []
+}
+
 class Graph:
 
+    def __init__(self, graph, node):
+        self.visited = []
+        self.queue = []
+        self.graph = graph
+        self.node = node
+
     def cityReachable(self):
-        print("City reachable")
-        input("Source city: ")
-        input("Destination city: ")
+        # print("City reachable")
+        # input("Source city: ")
+        # input("Destination city: ")
+        visited = self.visited
+        queue = self.queue
+        node = self.node
+        graph = self.graph
+        visited.append(node)
+        queue.append(node) 
+
+        while queue:          # Creating loop to visit each node
+            m = queue.pop(0) 
+            print (m, end = " ") 
+
+        for city in graph[m]:
+            if city not in visited:
+                visited.append(city)
+                queue.append(city)
 
     def minDistance(self):
         print("Min distance")
@@ -81,6 +111,8 @@ class LinkedList(MainProject):
         password = input('Enter Password: ')
         self.validate(username, password)
 
+graph = Graph(graph_items, '5')
+graph.cityReachable()
 
 # linked_list = LinkedList()
 # linked_list.insert({'Username': 'Username 1', "Password": 'Password 1'})
