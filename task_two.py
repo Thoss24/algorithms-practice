@@ -1,43 +1,75 @@
-
-graph_items = {
-  '5' : {'3', '7'}, #assign each city a number value. i.e, ask user "To select London as source press 1, and to choose exeter as destination choose 2"
-  '3' : ['2', '4'],
-  '7' : ['8'],
-  '2' : [],
-  '4' : ['8'],
-  '8' : []
-}
+from collections import deque
+from queue import Queue
 
 class Graph:
 
-    def __init__(self, graph, node):
-        self.visited = []
-        self.queue = []
-        self.graph = graph
-        self.node = node
+    def addEdge(self, v, w):
 
-    def cityReachable(self):
-        # print("City reachable")
-        # input("Source city: ")
-        # input("Destination city: ")
-        visited = self.visited
-        queue = self.queue
-        node = self.node
-        graph = self.graph
-        visited.append(node)
-        queue.append(node) 
+        global visited, adj
+        adj[v].append(w)
+        adj[w].append(v)
 
-        while queue:          # Creating loop to visit each node
-            m = queue.pop(0) 
-            print (m, end = " ") 
+    def cityReachable(self, componentNum, src):
+        global visited, adj
 
-        for city in graph[m]:
-            if city not in visited:
-                visited.append(city)
-                queue.append(city)
+        queue = deque()
+        queue.append(src)
+        visited[src] = 1
 
-    def minDistance(self):
-        print("Min distance")
+        reachableNodes = []
+
+        while (len(queue) > 0):
+            u = queue.popleft()
+            reachableNodes.append(u)
+
+            for itr in adj[u]:
+                if (visited[itr] == 0):
+                    visited[itr] = 1
+                    queue.append(itr)
+
+        return reachableNodes
+    
+    def displayReachableNodes(self, m):
+
+        for i in m:
+            print(i, end = " ")
+            print(m)
+    
+    def findReachableNodes(self, arr, n):
+
+        arr = [ 2, 4, 5 ]
+        n = len(arr)
+        global V, adj, visited
+        a = []
+        componentNum = 0
+
+        for i in range(n):
+            u = arr[i]
+            if (visited[u] == 0):
+                componentNum += 1
+                a = self.cityReachable(componentNum, u)
+
+                print("Reachable Nodes from ", u, " are")
+                print(self.displayReachableNodes(a))
+
+    def minDistance(self, graph, source):
+        Q = Queue()
+        # dictionary with large distance of each node from source
+        distance = {k: 9999999 for k in graph.keys()}
+        visited = set()
+        Q.put(source)
+        visited.update({0})
+        while not Q.empty():
+            vertex = Q.get()
+            if vertex == source:
+                distance[vertex] = 0
+            for u in graph[vertex]:
+                if u not in visited:
+                    if distance[u] > distance[vertex] + 1:
+                        distance[u] = distance[vertex] + 1
+                    Q.put(u)
+                    visited.update({u})
+        return distance
 
     def minSpanningTree(self):
         print("Min spanning tree")
@@ -60,12 +92,12 @@ class MainProject(Graph):
     def option1(self):
         print("You have chosen to check if one city is reachable to another.")
         print("Input your chosen source city then your chosen destination city")
-        self.cityReachable()
+        self.cityReachable
 
     def option2(self):
         print("You have chosen to check the minimum distance from the source city to the destination city.")
         print("Input your chosen source city then your chosen destination city")
-        self.minDistance()
+        self.minDistance
 
     def option3(self):
         print("You have chosen to to check the minimum spanning tree and total cost of the spanning tree. See below.")
@@ -111,19 +143,36 @@ class LinkedList(MainProject):
         password = input('Enter Password: ')
         self.validate(username, password)
 
-graph = Graph(graph_items, '5')
-graph.cityReachable()
+linked_list = LinkedList()
+linked_list.insert({'Username': 'Username 1', "Password": 'Password 1'})
+linked_list.insert({'Username': 'Username 2', "Password": 'Password 2'})
+linked_list.insert({'Username': 'Username 3', "Password": 'Password 3'})
+linked_list.insert({'Username': 'Username 4', "Password": 'Password 4'})
+linked_list.insert({'Username': 'Username 5', "Password": 'Password 5'})
+linked_list.insert({'Username': 'Username 6', "Password": 'Password 6'})
+linked_list.insert({'Username': 'Username 7', "Password": 'Password 7'})
+linked_list.insert({'Username': 'Username 8', "Password": 'Password 8'})
+linked_list.insert({'Username': 'Username 9', "Password": 'Password 9'})
+linked_list.insert({'Username': 'Username 10', "Password": 'Password 10'})
+linked_list.login()
 
-# linked_list = LinkedList()
-# linked_list.insert({'Username': 'Username 1', "Password": 'Password 1'})
-# linked_list.insert({'Username': 'Username 2', "Password": 'Password 2'})
-# linked_list.insert({'Username': 'Username 3', "Password": 'Password 3'})
-# linked_list.insert({'Username': 'Username 4', "Password": 'Password 4'})
-# linked_list.insert({'Username': 'Username 5', "Password": 'Password 5'})
-# linked_list.insert({'Username': 'Username 6', "Password": 'Password 6'})
-# linked_list.insert({'Username': 'Username 7', "Password": 'Password 7'})
-# linked_list.insert({'Username': 'Username 8', "Password": 'Password 8'})
-# linked_list.insert({'Username': 'Username 9', "Password": 'Password 9'})
-# linked_list.insert({'Username': 'Username 10', "Password": 'Password 10'})
+V = 7
+bfs = Graph()
+adj = [[] for i in range(V + 1)]
+visited = [0 for i in range(V + 1)]
+bfs.addEdge(1, 2)
+bfs.addEdge(2, 3)
+bfs.addEdge(3, 4)
+bfs.addEdge(3, 1)
+bfs.addEdge(5, 6)
+bfs.addEdge(5, 7)
+# For every ith element in the arr
+# find all reachable nodes from query[i]
+arr = [ 2, 4, 5 ]
+# Find number of elements in Set
+n = len(arr)
+#bfs.findReachableNodes(arr, n)
 
-# linked_list.login()
+# graph = {0: [1, 3], 1: [0, 2, 3], 2: [4, 1, 5], 3: [4, 0, 1], 4: [2, 3, 5], 5: [4, 2]}
+# print("Min distance from source for each node is")
+# print(bfs.minDistance(graph, 0))
