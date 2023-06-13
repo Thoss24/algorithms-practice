@@ -1,5 +1,122 @@
 from collections import deque
 from queue import Queue
+from threading import Thread
+
+class Prims:
+
+    def __init__(self, n, graph):
+        self.n = n
+        self.graph = graph
+
+    def PrimsMST(self):
+        inf = 9999999 # number of vertices in graph
+        selected_node = [0, 0, 0, 0, 0]
+        no_edge = 0
+        selected_node[0] = True
+
+        while (no_edge < self.n - 1):
+            minimum = inf
+            a = 0
+            b = 0
+            for m in range(self.n):
+                if selected_node[m]:
+                    for n in range(self.n):
+                        if ((not selected_node[n]) and self.graph[m][n]):
+                            if minimum > self.graph[m][n]:
+                                minimum = self.graph[m][n]
+                                a = m
+                                b = n
+            print("Prims")
+            print("Edge : Weight")
+            print(str(a) + "-" + str(b) + ":" + str(self.graph[a][b]))
+            selected_node[b] = True
+            no_edge += 1
+
+class Kruskals:
+
+    def __init__(self, vertices):
+        self.vertices = vertices
+        self.graph = []
+
+    # function to add edge to graph    
+    def addEdge(self, u, v, w):
+        self.graph.append([u, v, w])
+        print(self.graph)
+
+    def find(self, parent, i):
+        if parent[i] != i:
+
+            # reassign nodes parent
+            parent[i] = self.find(parent, parent[i])
+        return parent[i]
+    
+    def union(self, parent, rank, x, y):
+
+        # attach smaller rank tree
+        if rank[x] < rank[y]:
+            parent[x] = y
+        elif rank[x] > rank[y]:
+            parent[y] = x
+
+        else:
+            parent[y] = x
+            rank[x] += 1
+
+    def KruskalsMST(self):
+        # to store result
+        resultMST = []
+        # to store edges
+        i = 0
+        e = 0
+        self.graph = sorted(self.graph, key=lambda item: item[2])
+
+        parent = []
+        rank = []
+
+        for node in range(self.vertices):
+            parent.append(node)
+            rank.append(0)
+
+        while e < self.vertices - 1:
+
+            u, v, w = self.graph[i]
+            i = i + 1
+            x = self.find(parent, u)
+            y = self.find(parent, v)
+
+            #if including edge does not cause cycle, include it in result and increment the index for next edge
+            if x != y:
+                e = e + 1
+                resultMST.append([u, v, w])
+                self.union(parent, rank, x, y)
+
+            minCost = 0
+            for u, v, weight in resultMST:
+                minCost += weight
+                print("Kruskals")
+                print(u, v, weight)
+                print("Min spanning tree", minCost)
+
+graph = [[0, 19, 5, 0, 0],
+         [19, 0, 5, 9, 2],
+         [5, 5, 0, 1, 6],
+         [0, 9, 1, 0, 1],
+         [0, 2, 6, 1, 0]]
+
+prims = Prims(5, graph)
+kruskals = Kruskals(4)
+
+kruskals.addEdge(0, 1, 10)
+kruskals.addEdge(0, 2, 6)
+kruskals.addEdge(0, 3, 5)
+kruskals.addEdge(1, 3, 15)
+kruskals.addEdge(2, 3, 4)
+
+def start():
+    if __name__ == '__main__':
+        Thread(target= prims.PrimsMST).start()
+        Thread(target= kruskals.KruskalsMST).start()
+
 
 class Graph:
 
@@ -74,7 +191,7 @@ class Graph:
     def minSpanningTree(self):
         print("Min spanning tree")
 
-class MainProject(Graph):
+class MainProject(Graph, Kruskals, Prims):
 
     def showFunctionality(self):
         print('London, Manchester, Liverpool, Bournemouth, Southampton, Exeter, Leeds, Cardiff')
@@ -86,8 +203,8 @@ class MainProject(Graph):
             self.option1()
         elif userInput == "2":
             self.option2()
-        else:
-            self.option3()
+        elif userInput == "3":
+            start()
 
     def option1(self):
         print("You have chosen to check if one city is reachable to another.")
@@ -176,3 +293,5 @@ n = len(arr)
 # graph = {0: [1, 3], 1: [0, 2, 3], 2: [4, 1, 5], 3: [4, 0, 1], 4: [2, 3, 5], 5: [4, 2]}
 # print("Min distance from source for each node is")
 # print(bfs.minDistance(graph, 0))
+
+
