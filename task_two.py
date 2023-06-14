@@ -112,6 +112,11 @@ kruskals.addEdge(0, 3, 5)
 kruskals.addEdge(1, 3, 15)
 kruskals.addEdge(2, 3, 4)
 
+V = 7
+
+adj = [[] for i in range(V + 1)]
+visited = [0 for i in range(V + 1)]
+
 def start():
     if __name__ == '__main__':
         Thread(target= prims.PrimsMST).start()
@@ -150,7 +155,6 @@ class Graph:
 
         for i in m:
             print(i, end = " ")
-            print(m)
     
     def findReachableNodes(self, arr, n):
 
@@ -166,8 +170,8 @@ class Graph:
                 componentNum += 1
                 a = self.cityReachable(componentNum, u)
 
-                print("Reachable Nodes from ", u, " are")
-                print(self.displayReachableNodes(a))
+                print("\nReachable Nodes from ", u, " are")
+                self.displayReachableNodes(a)
 
     def minDistance(self, graph, source):
         Q = Queue()
@@ -191,6 +195,28 @@ class Graph:
     def minSpanningTree(self):
         print("Min spanning tree")
 
+bfs = Graph()
+
+def cityReachable():
+    bfs.addEdge(1, 2)
+    bfs.addEdge(2, 3)
+    bfs.addEdge(3, 4)
+    bfs.addEdge(3, 1)
+    bfs.addEdge(5, 6)
+    bfs.addEdge(5, 7)
+    # For every ith element in the arr
+    # find all reachable nodes from query[i]
+    arr = [ 2, 4, 5 ]
+    # Find number of elements in Set
+    n = len(arr)
+    bfs.findReachableNodes(arr, n)
+
+
+def minDist():
+    graph = {0: [1, 3], 1: [0, 2, 3], 2: [4, 1, 5], 3: [4, 0, 1], 4: [2, 3, 5], 5: [4, 2]}
+    print("Min distance from source for each node is")
+    print(bfs.minDistance(graph, 0))
+
 class MainProject(Graph, Kruskals, Prims):
 
     def showFunctionality(self):
@@ -200,9 +226,9 @@ class MainProject(Graph, Kruskals, Prims):
         print('3 Finding the minimum spanning tree from, from the above list of cities.')
         userInput = input("Choose an option by inputting the corresponding number: ")
         if userInput == "1":
-            self.option1()
+            cityReachable()
         elif userInput == "2":
-            self.option2()
+            minDist()
         elif userInput == "3":
             start()
 
@@ -273,25 +299,5 @@ linked_list.insert({'Username': 'Username 9', "Password": 'Password 9'})
 linked_list.insert({'Username': 'Username 10', "Password": 'Password 10'})
 linked_list.login()
 
-V = 7
-bfs = Graph()
-adj = [[] for i in range(V + 1)]
-visited = [0 for i in range(V + 1)]
-bfs.addEdge(1, 2)
-bfs.addEdge(2, 3)
-bfs.addEdge(3, 4)
-bfs.addEdge(3, 1)
-bfs.addEdge(5, 6)
-bfs.addEdge(5, 7)
-# For every ith element in the arr
-# find all reachable nodes from query[i]
-arr = [ 2, 4, 5 ]
-# Find number of elements in Set
-n = len(arr)
-#bfs.findReachableNodes(arr, n)
-
-# graph = {0: [1, 3], 1: [0, 2, 3], 2: [4, 1, 5], 3: [4, 0, 1], 4: [2, 3, 5], 5: [4, 2]}
-# print("Min distance from source for each node is")
-# print(bfs.minDistance(graph, 0))
 
 
