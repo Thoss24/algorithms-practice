@@ -165,13 +165,14 @@ class Graph:
         componentNum = 0
 
         for i in range(n):
-            u = arr[i]
+            #u = arr[i]
+            u = int(input("Source: "))
             if (visited[u] == 0):
                 componentNum += 1
                 a = self.cityReachable(componentNum, u)
-
                 print("\nReachable Nodes from ", u, " are")
                 self.displayReachableNodes(a)
+                break
 
     def minDistance(self, graph, source):
         Q = Queue()
@@ -213,9 +214,10 @@ def cityReachable():
 
 
 def minDist():
-    graph = {0: [1, 3], 1: [0, 2, 3], 2: [4, 1, 5], 3: [4, 0, 1], 4: [2, 3, 5], 5: [4, 2]}
+    graph = {1: [0, 2, 3], 2: [4, 1, 5], 3: [4, 0, 1], 4: [2, 3, 5], 5: [4, 2]}
     print("Min distance from source for each node is")
-    print(bfs.minDistance(graph, 0))
+    source = int(input('Source location: '))
+    print(bfs.minDistance(graph, source))
 
 class MainProject(Graph, Kruskals, Prims):
 
