@@ -158,7 +158,7 @@ class Graph:
     
     def findReachableNodes(self, arr, n):
 
-        arr = [ 2, 4, 5 ]
+        arr = [1, 2, 3, 4, 5 ]
         n = len(arr)
         global V, adj, visited
         a = []
@@ -166,6 +166,7 @@ class Graph:
 
         for i in range(n):
             #u = arr[i]
+            print("Available nodes are 1, 2, 3, 4, 5, 6, 7")
             u = int(input("Source: "))
             if (visited[u] == 0):
                 componentNum += 1
@@ -215,6 +216,7 @@ def cityReachable():
 
 def minDist():
     graph = {1: [0, 2, 3], 2: [4, 1, 5], 3: [4, 0, 1], 4: [2, 3, 5], 5: [4, 2]}
+    print("Available node are 1, 2, 3, 4, 5")
     print("Min distance from source for each node is")
     source = int(input('Source location: '))
     print(bfs.minDistance(graph, source))
