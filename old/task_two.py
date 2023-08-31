@@ -224,7 +224,6 @@ def minDist():
 class MainProject(Graph, Kruskals, Prims):
 
     def showFunctionality(self):
-        print('London, Manchester, Liverpool, Bournemouth, Southampton, Exeter, Leeds, Cardiff')
         print('1. Searching a city from the current city, from the above list of cities.')
         print('2. The minimum distance between two cities, from the above list of cities.')
         print('3 Finding the minimum spanning tree from, from the above list of cities.')
@@ -304,4 +303,5 @@ linked_list.insert({'Username': 'Username 10', "Password": 'Password 10'})
 linked_list.login()
 
 
-
+# to execute the code simply run python3 task_two.py in the terminal. Provide a username and password that match i.e., Username 4 & Password 4
+# Then select the functionality that you want. Each function will tell you what nodes are available, so you can provide input accordingly
