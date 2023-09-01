@@ -3,30 +3,34 @@ const findClosingTags = (str) => {
     // does the string have any spaces?
     // does the string start with a <div> tag?
     // what if it's an empty string with only the html tags?
+    // will there be a space between the opening tag and the fist word
 
-    let result = '';
+    let hasClosingTag = true
 
-    for (let char = 0; char < str.length; char++) {
+    let result = ''
 
-        let segmentedStr = str.slice(char, str.length);
+    for (let i = 0; i < str.length; i++) {
+        let iteratingStr = str.substring(i, str.length)
 
-        let endOfString = segmentedStr.substr(segmentedStr.length - 5);
+        let nextOpeningTag = iteratingStr.slice(0, 5);
 
-        let nextOpeningTag = segmentedStr.slice(0, 5);
+        if (nextOpeningTag === '<div>' && hasClosingTag === true ) {
+            hasClosingTag = false
+            result += str[i]
+            continue
+        }
 
-        if (nextOpeningTag === '<div>') {
-            result[char] += '</div>'
-            console.log(result[char])
-        } else result += str[char]
-
-        if (endOfString === '</div>') return
-
-        //console.log(endOfString)
+        if (nextOpeningTag === '<div>' && hasClosingTag === false) {
+            result += str[i] + '/'
+            hasClosingTag = true
+        } else {
+            result += str[i]
+        }
 
     }
 
-    //console.log(result)
+    return result
     
 };
 
-findClosingTags('<div>hello world <div>find the closing tag')
+console.log(findClosingTags('<div><div><p>Hello</p><div><div><div><div>'))
