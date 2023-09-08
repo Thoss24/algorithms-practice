@@ -10,17 +10,19 @@ const arr2 = [[[1, 2], [3, [4, 5]], 6]].flatten();
 
 Array.prototype.flatten2 = function () {
 
-    const result = []
+    let result = []
 
-    for (const value of this) {
-        if (Array.isArray(value)) {
-            value.flatten2()
-            result.push(flattened)
-            console.log(result)
-        } else {
-            result.push(value)
+    const stripBrackets = (value) => {
+        for (const val of value) {
+            if (Array.isArray(val)) {
+                stripBrackets(val)
+            } else {
+                result.push(val)
+            }
         }
     }
+
+    stripBrackets(this)
     
     return result
 
@@ -28,4 +30,4 @@ Array.prototype.flatten2 = function () {
 
 //const arr4 = [[[1,2], [3, [4,5]], 6]].flatten2();
 const arr5 = [[[1,2],[2, [7, [8]]], [3, [4,5]], 6]].flatten2();
-//console.log(arr5)
+console.log(arr5)
