@@ -35,5 +35,25 @@ const multiplyAll = (arr) => {
 
     return product
 };
-multiplyAll(multiArr)
+
+//multiplyAll(multiArr)
+const nestedArr = [1, [3, 8, [4]], 5, [12, [5, [2]]]];
+
+let result = 0
+
+const addAllRecursion = (arr) => {
+
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            addAllRecursion(arr[i])
+        } else {
+            result += arr[i]                                                                  
+        }
+    }
+
+    return 0
+
+};
+
+addAllRecursion(nestedArr) // 57600
 
